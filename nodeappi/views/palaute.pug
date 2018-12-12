@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    h1=title 
+    <hr> 
+    p TODO-listan tilanne  
+    if error 
+        p Virhe!! 
+    else 
+        table 
+            for palaute in palauteList 
+                tr 
+                    - var id=palaute.id 
+                    td(class='ide'): a(href='./palaute/' + id)= palaute.id 
+                    td=palaute.sisalto 
+                    td: a(href='./palaute/deletePalaute/' + id) Poista
