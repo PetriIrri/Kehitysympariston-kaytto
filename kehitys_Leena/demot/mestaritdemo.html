@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <meta charset="utf-8"> 
+
+    <title>Mestarit</title> 
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">  
+    <link rel="stylesheet" href="mestarit.css"> 
+  </head> 
+
+  <body> 
+
+      <header> 
+
+      </header> 
+
+      <section> 
+
+      </section> 
+
+    <script> 
+    var header = document.querySelector('header'); 
+    var section = document.querySelector('section'); 
+     
+	 var requestURL = 'http://magnesium/dat16syst/petri.irri/kehitys_json/mestarit.json';
+	 var request = new XMLHttpRequest();
+	 request.open('GET', requestURL);
+	 request.responseType = 'json';
+	 request.send();
+	 request.onload = function(){
+		var mestarit = request.response;
+		populateHeader(mestarit);
+		naytaMestarit(mestarit);
+	 }
+	 
+	 function populateHeader (jsonObj) {
+		var myH1 = document.createElement('h1');
+		myH1.textContent = jsonObj['listanNimi'];
+		header.appendChild(myH1);
+		
+		var myPara = document.createElement('p');
+		myPara.textContent = 'kotipaikka: ' + jsonObj['kotipaikka'] + ' //perustettu: ' + jsonObj['muodostettu'];
+		header.appendChild(myPara);
+	 }
+	 
+	 function naytaMestarit (jsonObj){
+		var mestariluettelo = jsonObj['jasenet'];
+		for (var i=0; i < mestariluettelo.length; i++){
+			var myArticle = document.createElement('article');
+			var myH2 = document.createElement('h2');
+			var para1 = document.createElement('p');
+			var para2 = document.createElement('p');
+			var para3 = document.createElement('p');
+			var myList = document.createElement('ul');
+			myH2.textContent = mestariluettelo[i].nimi;
+			para1.textContent = 'Lempinimi: ' + mestariluettelo[i].lempinimi;
+			para2.textContent = 'Ikä: ' + mestariluettelo[i].ika;
+			para3.textContent = 'vahvuudet: ';
+			var vahvuus = mestariluettelo[i].vahvuudet;
+			for(var j = 0; j < vahvuus.length; j++){
+				var listItem = document.createElement('li');
+				listItem.textContent = vahvuus[j];
+				myList.appendChild(listItem);
+			}
+			myArticle.appendChild(myH2);
+			myArticle.appendChild(para1);
+			myArticle.appendChild(para2);
+			myArticle.appendChild(para3);
+			myArticle.appendChild(myList);
+			section.appendChild(myArticle);
+			
+		}
+	}
+	 
+    </script> 
+  </body> 
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>koesivu</title>
+  <script type="text/javascript">
+    window.onload = function () {
+      var taulukonalue = document.getElementById("taulukonalue"); // haetaan äitielementti id:n perusteella
+      var otsikko1 = document.createElement('h1'); // luodaan uusi elementti
+
+      taulukonalue.appendChild(otsikko1); // lisätään uusi elementti(h1) äitielementtiin
+
+      var otsikonteksti = "otsikko sivulle"; // luodaan otsikolle teksti
+
+      otsikko1.textContent = otsikonteksti; //annetaan ominaisuus elementille
+
+      var taulukko = document.createElement('table'); //luodaan uusi elementti
+      taulukonalue.appendChild(taulukko);
+
+      var rivi1 = document.createElement('tr');
+      taulukko.appendChild(rivi1);
+
+      var solu1 = document.createElement('td');
+      rivi1.appendChild(solu1);
+      solu1teksti = "1 solu";
+      solu1.textContent = solu1teksti;
+
+      var solu2 = document.createElement('td');
+      rivi1.appendChild(solu2);
+      solu2teksti = "2 solu";
+      solu2.textContent = solu2teksti;
+
+    }
+  </script>
+</head>
+<body>
+  <section id="taulukonalue">
+  </section>
+</body>
+</html>
